@@ -19,5 +19,8 @@ public Card(String a, int b, String c) {
         cardName = "ace";
     }
 
-
+    @Override
+    public String toString() {
+        return cardName;
+    }
 }
