@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class Main {
     public static int updateScore(int currentScore, Card drawnCard) {
         int cardValue = drawnCard.getValue();
-        if (cardValue == 11 && currentScore + cardValue >= 21) {
+        if (cardValue == 11 && currentScore + cardValue > 21) {
             cardValue = 1;
         }
         return currentScore + cardValue;
@@ -22,14 +22,21 @@ public class Main {
     private static void determineWinner(int playerScore, int computerScore, int bet, int playerMoney) {
         System.out.println("Your final score: " + playerScore);
         System.out.println("Dealer's final score: " + computerScore);
+        System.out.println("-------------------------------------");
 
         if (playerScore > 21 || (computerScore <= 21 && computerScore > playerScore)) {
-            System.out.println("THE DEALER WINS!");
+            System.out.println("\uD83D\uDD77 THE DEALER WINS! \uD83D\uDD77");
+            System.out.println("-------------------------------------");
+
             playerMoney -= bet;
         } else if (playerScore == computerScore) {
-            System.out.println("TIE GAME!");
+            System.out.println("*.·:·.✧ TIE GAME! ✧.·:·.*");
+            System.out.println("-------------------------------------");
+
         } else {
-            System.out.println("YOU WIN!");
+            System.out.println("ₓ˚. ୭ ˚○◦˚YOU WIN!˚◦○˚ ୧ .˚ₓ");
+            System.out.println("-------------------------------------");
+
             playerMoney += bet;
         }
 
@@ -37,7 +44,10 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        System.out.println("WELCOME TO BLACKJACK");
+        System.out.println("------------------------------");
+        System.out.println("|  ♧ WELCOME TO BLACKJACK ♡  |");
+        System.out.println("------------------------------");
+        System.out.println("");
 
         Deck deck1 = new Deck();
         Card[] deckCards = deck1.getDeck();
@@ -79,31 +89,41 @@ public class Main {
 
 
             System.out.println("-------------------------------------");
-            System.out.print("Do you want to (1) HIT or (2) STAND? ");
-            int choice = scanner.nextInt();
+            boolean playerBusted = false;
+            while (true) {
+                System.out.print("Do you want to (1) HIT or (2) STAND? ");
+                int choice = scanner.nextInt();
 
-            if (choice == 1) {
-                playerScore = dealCard(deckCards, playerScore);
+                if (choice == 1) {
+                    playerScore = dealCard(deckCards, playerScore);
+                    System.out.println("YOUR CURRENT SCORE: " + playerScore);
+                    System.out.println();
 
-                if (playerScore > 21) {
-                    System.out.println("BUSTED! YOUR SCORE WAS " + playerScore);
+                    if (playerScore > 21) {
+                        System.out.println();
+                        System.out.println("BUSTED! YOUR SCORE WAS " + playerScore);
+                        System.out.println();
+                        playerBusted = true;
+                        break;
+                    }
+                } else if (choice == 2) {
                     break;
+                } else {
+                    System.out.println();
+                    System.out.println("Invalid choice.");
                 }
-            } else if (choice == 2) {
+            }
+            while (!playerBusted && computerScore < 17) {
+                computerScore = dealCard(deckCards, computerScore);
+            }
+
+            determineWinner(playerScore, computerScore, bet, playerMoney);
+
+            if (playerMoney <= 0) {
+                System.out.println("Game over. You're out of money.");
                 break;
-            } else {
-                System.out.println();
-                System.out.println("Invalid choice.");
             }
         }
-        while (computerScore < 17) {
-            computerScore += dealCard(deckCards, computerScore);
-        }
 
-        determineWinner(playerScore, computerScore, bet, playerMoney);
-        if (playerMoney <= 0) {
-            System.out.println("Game over. You're out of money.");
-        }
     }
-
 }
