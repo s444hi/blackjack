@@ -5,7 +5,7 @@ public class Deck {
     private Card[] cards;
 
     public Deck() {
-        System.out.println("called const");
+
     }
     public Card[] getDeck() {
         cards = new Card[52];
