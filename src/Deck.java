@@ -29,6 +29,8 @@ public class Deck {
             for (int i = 0; i < 13; i++) {
                 if (i < 9) {
                     value = i + 2;
+                } else if (i == 12){
+                    value = 11;
                 } else {
                     value = 10;
                 }

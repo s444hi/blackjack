@@ -13,7 +13,7 @@ public class Card {
     // default
     public Card() {
         value = 11;
-        cardName = "ace";
+        cardName = "Ace";
     }
 
     // getters
