@@ -46,10 +46,6 @@ public class Card {
         return cardName + " of " + suit;
     }
 
-    // Card array
+    // card array
     private Card[] cards;
-
-    // Constructor to create a deck
-
-    // Method to create a deck
 }

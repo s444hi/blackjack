@@ -5,13 +5,17 @@ public class Deck {
     private Card[] cards;
 
     public Deck() {
-
+        // empty const
     }
+
+    // calls to create a deck
     public Card[] getDeck() {
         cards = new Card[52];
         createDeck();
         return cards;
     }
+
+    // creates deck
     public void createDeck() {
         String[] suits = {"Hearts", "Spades", "Clubs", "Diamonds"};
         String[] cardNames = {"2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen",
